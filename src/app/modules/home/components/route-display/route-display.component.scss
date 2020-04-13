@@ -1,0 +1,28 @@
+.icon-margin {
+  margin: 0 10px;
+}
+
+.change-bus {
+  border: 3px dotted rgba(150, 0, 0, 0.5);
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px
+}
+
+.route-info {
+  border: 3px solid rgba(0, 100, 0, 0.8);
+  border-radius: 5px;
+  margin: 15px 0;
+  padding: 20px 10px
+}
+
+.bus-stop {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+@media screen and (min-width: 991px){
+  .route-wrapper {
+    max-height: 65vh;
+  }
+}

@@ -1,0 +1,27 @@
+<div>
+  <div class="form-group">
+    <label for="routeStart">Lähtöasema</label>
+    <select class="form-control font-weight-bold"
+            id="routeStart"
+            [(ngModel)]="routeStart"
+            (ngModelChange)="routeChangeHandler()">
+      <option *ngFor="let id of routeIds"
+              [value]="id">
+        {{id}}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="routeEnd">Määräasema</label>
+    <select class="form-control font-weight-bold"
+            id="routeEnd"
+            [(ngModel)]="routeEnd"
+            (ngModelChange)="routeChangeHandler()">
+      <option *ngFor="let id of routeIds"
+              [value]="id">
+        {{id}}
+      </option>
+    </select>
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+<div class="container-fluid" style="min-width: 350px;">
+  <div class="row px-3 d-flex align-items-center justify-content-center" style="height: 8vh">
+    <h1>BUS-BUZZ</h1>
+  </div>
+  <div class="row px-3 overflow-auto" style="min-height:90vh">
+    <div class="col-xl-4 col-lg-5 px-0 px-lg-3">
+      <div style="max-height: 25vh">
+        <bb-route-selector [routeStart]="routeStart" [routeEnd]="routeEnd"></bb-route-selector>
+      </div>
+      <bb-route-display [routeStart]="routeStart"
+                        [routeEnd]="routeEnd"
+                        [routeEdges]="routeEdges"></bb-route-display>
+    </div>
+    <div class="col" style="min-height:50vh;max-height: 90vh">
+      <bb-bus-map [routeStart]="routeStart"
+                  [routeEnd]="routeEnd"
+                  [route]="route"
+                  [routeEdges]="routeEdges"></bb-bus-map>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="overflow-auto route-wrapper">
+  <div class="row">
+    <div class="col text-center">
+      <span class="mr-2">Matka-aika:</span> <b>{{calculateTotalTime()}} min</b>
+    </div>
+  </div>
+  <ng-container *ngFor="let route of lineRoutes; index as i">
+    <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i === 0">
+      <fa-layers [fixedWidth]="true" size="2x" style="font-size: 32px; font-weight: 700">
+        <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
+        <fa-layers-text content="{{routeStart}}" style="color: black;" transform="shrink-5"></fa-layers-text>
+      </fa-layers>
+      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
+    </div>
+    <div class="row d-flex align-items-center route-info">
+      <div class="col-auto px-1">
+        <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
+      </div>
+      <div class="col-auto px-1 bus-stop">
+        <fa-layers [fixedWidth]="true" size="1x">
+          <fa-icon [icon]="['far', 'circle']"></fa-icon>
+          <fa-layers-text content="{{route.startNode}}" style="color: black;" transform="shrink-7"></fa-layers-text>
+        </fa-layers>
+      </div>
+      <div class="col-auto px-1">
+        <fa-icon [icon]="['fas', 'arrow-right']" size="1x"></fa-icon>
+      </div>
+      <div class="col-auto px-1 bus-stop">
+        <fa-layers [fixedWidth]="true" size="1x">
+          <fa-icon [icon]="['far', 'circle']"></fa-icon>
+          <fa-layers-text content="{{route.endNode}}" style="color: black;" transform="shrink-7"></fa-layers-text>
+        </fa-layers>
+      </div>
+      <div class="col text-right font-weight-bold">{{route.totalTime}} min</div>
+    </div>
+    <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i < lineRoutes.length -1">
+      <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="this.lineRoutes[i+1].lineColor"
+               class="icon-margin"></fa-icon>
+    </div>
+    <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i === lineRoutes.length - 1">
+      <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-layers [fixedWidth]="true" size="2x" style="font-size: 32px; font-weight: 700">
+        <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
+        <fa-layers-text content="{{routeEnd}}" style="color: black;" transform="shrink-5"></fa-layers-text>
+      </fa-layers>
+    </div>
+  </ng-container>
+</div>
+
