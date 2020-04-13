@@ -18,8 +18,8 @@ export class RouteSelectorComponent {
   }
 
   routeChangeHandler() {
-    if (this.routeStart && this.routeEnd && this.routeStart !== this.routeEnd) {
+    // if (this.routeStart && this.routeEnd && this.routeStart !== this.routeEnd) {
       this.router.navigate(['/'], { queryParams: { routeStart: this.routeStart, routeEnd: this.routeEnd } });
-    }
+    // }
   }
 }

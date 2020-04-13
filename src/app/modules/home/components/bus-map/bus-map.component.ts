@@ -32,7 +32,9 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.viewInitDone) {
+      console.log(this.routeEdges)
       this.stopAnimation();
+      this.resetGraph();
       this.renderBusRoute();
     }
   }
@@ -56,7 +58,7 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
     this.cy.layout({
       name: 'breadthfirst',
       animate: true,
-      animationDuration: 1000,
+      animationDuration: 800,
       avoidOverlap: true,
       spacingFactor: 2.75,
       fit: true, // padding: 10
@@ -71,7 +73,8 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
   }
 
   renderBusRoute() {
-    if (this.routeStart && this.routeEnd && this.route && this.routeEdges && this.routeStart !== this.routeEnd) {
+    // just to be sure
+    if (this.routeStart && this.routeEnd && this.route && this.routeEdges) {
       const routeEdges = [...this.routeEdges];
       this.resetGraph();
       // have to handle edges both ways
@@ -108,7 +111,7 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
             }
             ele.addClass('highlighted-node');
           }
-        }, index * 400));
+        }, index * 500));
       }
     }
   }
@@ -118,7 +121,7 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
       e.removeClass('highlighted-node');
       e.removeClass('highlighted-edge');
     });
-    this.routeEdges = [];
+    // this.routeEdges = [];
   }
 
   private stopAnimation() {

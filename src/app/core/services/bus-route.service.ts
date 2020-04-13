@@ -13,9 +13,11 @@ export class BusRouteService {
   public getRouteNodeAndEdgeIds(routeStartId: string, routeEndId: string): string[] {
     const nodes = this.findShortestRoute(routeStartId, routeEndId);
     const nodesAndEdges = [];
-    for (let i = 0; i < nodes.length - 1; i++) {
+    for (let i = 0; i < nodes.length; i++) {
       nodesAndEdges.push(nodes[i]);
-      nodesAndEdges.push(nodes[i] + nodes[i + 1]);
+      if (i < nodes.length - 1) {
+        nodesAndEdges.push(nodes[i] + nodes[i + 1]);
+      }
     }
     return nodesAndEdges;
   }
