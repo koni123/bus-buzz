@@ -74,13 +74,21 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
     if (this.routeStart && this.routeEnd && this.route && this.routeEdges && this.routeStart !== this.routeEnd) {
       const routeEdges = [...this.routeEdges];
       this.resetGraph();
-      const pathAsElements = this.route.map(id => this.cy.$id(id));
+      // have to handle edges both ways
+      const pathAsElements = this.route.map(id => {
+        const ele = this.cy.$id(id);
+        if (ele.isNode() || ele.isEdge()) {
+          return ele;
+        } else {
+          return this.cy.$id(id[1] + id[0]);
+        }
+      });
       let edge: RouteEdge;
       for (let index = 0; index < pathAsElements.length; index++) {
         this.animationTimer.push(setTimeout(() => {
           const ele = pathAsElements[index];
           if (ele.isEdge()) {
-            edge = routeEdges.find(e => e.edgeStart + e.edgeEnd === ele.id());
+            edge = routeEdges.find(e => e.edgeStart + e.edgeEnd === ele.id() || e.edgeEnd + e.edgeStart === ele.id());
             ele.data('color', edge.lineColor);
             ele.addClass('highlighted-edge');
           }

@@ -21,6 +21,8 @@ export const busMapStyles = [
     selector: 'edge',
     style: {
       'curve-style': 'segments',
+      content: 'data(weight)',
+      'font-size': '30px',
       width: 3,
       'line-color': '#9a9a9a',
     }
