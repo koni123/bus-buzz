@@ -1,8 +1,6 @@
 <div class="overflow-auto route-wrapper">
-  <div class="row">
-    <div class="col text-center">
-      <span class="mr-2">Matka-aika:</span> <b>{{calculateTotalTime()}} min</b>
-    </div>
+  <div class="text-center">
+    <span class="mr-2">Matka-aika:</span> <b>{{calculateTotalTime()}} min</b>
   </div>
   <ng-container *ngFor="let route of lineRoutes; index as i">
     <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i === 0">
