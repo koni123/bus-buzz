@@ -1,6 +1,20 @@
-<div class="overflow-auto route-wrapper">
+<div>
   <div class="text-center">
     <span class="mr-2">Matka-aika:</span> <b>{{calculateTotalTime()}} min</b>
+  </div>
+  <!--  if route start end end the same-->
+  <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="routeStart && routeEnd && routeStart === routeEnd && lineRoutes.length === 0">
+    <fa-layers [fixedWidth]="true" size="2x" style="font-size: 32px; font-weight: 700">
+      <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
+      <fa-layers-text content="{{routeStart}}" style="color: black;" transform="shrink-5"></fa-layers-text>
+    </fa-layers>
+    <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+    <fa-icon [icon]="['fas', 'male']" size="2x" class="icon-margin"></fa-icon>
+    <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+    <fa-layers [fixedWidth]="true" size="2x" style="font-size: 32px; font-weight: 700">
+      <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
+      <fa-layers-text content="{{routeEnd}}" style="color: black;" transform="shrink-5"></fa-layers-text>
+    </fa-layers>
   </div>
   <ng-container *ngFor="let route of lineRoutes; index as i">
     <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i === 0">

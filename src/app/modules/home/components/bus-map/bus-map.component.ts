@@ -32,7 +32,6 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.viewInitDone) {
-      console.log(this.routeEdges)
       this.stopAnimation();
       this.resetGraph();
       this.renderBusRoute();
@@ -60,7 +59,7 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
       animate: true,
       animationDuration: 800,
       avoidOverlap: true,
-      spacingFactor: 2.75,
+      spacingFactor: 2.5,
       fit: true, // padding: 10
     } as LayoutOptions).run();
 

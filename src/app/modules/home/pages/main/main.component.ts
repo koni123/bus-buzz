@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouteEdge } from '../../../../core/models/route-edge';
 import { ActivatedRoute } from '@angular/router';
 import { BusRouteService } from '../../../../core/services/bus-route.service';
+import { START_END_POINT_COLOR } from '../../../../core/config/common.config';
 
 @Component({
   selector: 'bb-main',
@@ -13,6 +14,8 @@ export class MainComponent implements OnInit {
   routeEdges: RouteEdge[] = [];
   routeStart: string;
   routeEnd: string;
+
+  headerSquareColor = START_END_POINT_COLOR;
 
   constructor(private activatedRoute: ActivatedRoute, private routeService: BusRouteService) {
   }

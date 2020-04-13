@@ -1,17 +1,48 @@
-<div class="container-fluid" style="min-width: 350px;">
-  <div class="row px-3 d-flex align-items-center justify-content-center" style="height: 8vh">
-    <h1>BUS-BUZZ</h1>
+<div class="container-fluid p-4" style="min-width: 350px">
+  <div class="row d-flex align-items-center mb-3" style="min-height: 8vh; border: 3px solid black; border-radius: 5px">
+    <div class="col-md text-md-right">
+      <fa-layers [fixedWidth]="true" class="header-big">
+        <fa-icon [icon]="['fas', 'square']" [style.color]="headerSquareColor"></fa-icon>
+        <fa-layers-text content="B" style="color: black;" transform="shrink-4 up-1"></fa-layers-text>
+      </fa-layers>
+      <fa-layers [fixedWidth]="true" class="header-small">
+        <fa-icon [icon]="['far', 'circle']"></fa-icon>
+        <fa-layers-text content="U" style="color: black;" transform="shrink-7"></fa-layers-text>
+      </fa-layers>
+      <fa-layers [fixedWidth]="true" class="header-small">
+        <fa-icon [icon]="['far', 'circle']"></fa-icon>
+        <fa-layers-text content="S" style="color: black;" transform="shrink-7"></fa-layers-text>
+      </fa-layers>
+    </div>
+    <div class="col-md">
+      <fa-layers [fixedWidth]="true" class="header-big">
+        <fa-icon [icon]="['fas', 'square']" [style.color]="headerSquareColor"></fa-icon>
+        <fa-layers-text content="B" style="color: black;" transform="shrink-5 up-1"></fa-layers-text>
+      </fa-layers>
+      <fa-layers [fixedWidth]="true" class="header-small">
+        <fa-icon [icon]="['far', 'circle']"></fa-icon>
+        <fa-layers-text content="U" style="color: black;" transform="shrink-7"></fa-layers-text>
+      </fa-layers>
+      <fa-layers [fixedWidth]="true" class="header-small">
+        <fa-icon [icon]="['far', 'circle']"></fa-icon>
+        <fa-layers-text content="Z" style="color: black;" transform="shrink-7"></fa-layers-text>
+      </fa-layers>
+      <fa-layers [fixedWidth]="true" class="header-small">
+        <fa-icon [icon]="['far', 'circle']"></fa-icon>
+        <fa-layers-text content="Z" style="color: black;" transform="shrink-7"></fa-layers-text>
+      </fa-layers>
+    </div>
   </div>
-  <div class="row px-3 overflow-auto" style="min-height:90vh">
-    <div class="col-xl-4 col-lg-5 px-0 px-lg-3">
-      <div style="max-height: 25vh">
+  <div class="row">
+    <div class="col-lg-5 col-xl-4 p-0 pr-lg-2 overflow-auto" style="max-height: 80vh">
+      <div>
         <bb-route-selector [routeStart]="routeStart" [routeEnd]="routeEnd"></bb-route-selector>
       </div>
       <bb-route-display [routeStart]="routeStart"
                         [routeEnd]="routeEnd"
                         [routeEdges]="routeEdges"></bb-route-display>
     </div>
-    <div class="col" style="min-height:50vh;max-height: 90vh">
+    <div class="col-lg-7 col-xl-8 p-0 pl-lg-2" style="min-height: 80vh">
       <bb-bus-map [routeStart]="routeStart"
                   [routeEnd]="routeEnd"
                   [route]="route"
