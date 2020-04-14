@@ -3,20 +3,36 @@
 }
 
 .change-bus {
-  border: 3px dotted rgba(150, 0, 0, 0.5);
+  border: 3px dotted #e1934c;
   border-radius: 5px;
   margin: 10px 0;
-  padding: 10px
+  padding: 10px;
+  background-color: #d6cdb5;
 }
 
 .route-info {
-  border: 3px solid rgba(0, 100, 0, 0.8);
+  border: 3px solid #718955;
   border-radius: 5px;
   margin: 15px 0;
-  padding: 20px 10px
+  padding: 20px 10px;
+  background-color: #d6cdb5;
 }
 
 .bus-stop {
   font-size: 30px;
   font-weight: 700;
+}
+
+.start-stop-node {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.start-stop-node-content {
+  color: black;
+}
+
+.stop-node {
+  color: black;
+  font-size: 26px
 }

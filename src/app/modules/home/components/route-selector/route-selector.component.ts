@@ -19,7 +19,11 @@ export class RouteSelectorComponent {
 
   routeChangeHandler() {
     // if (this.routeStart && this.routeEnd && this.routeStart !== this.routeEnd) {
-      this.router.navigate(['/'], { queryParams: { routeStart: this.routeStart, routeEnd: this.routeEnd } });
+    this.router.navigate(['/'], { queryParams: { routeStart: this.routeStart, routeEnd: this.routeEnd } });
     // }
+  }
+
+  removeSelections() {
+    this.router.navigate(['/']);
   }
 }

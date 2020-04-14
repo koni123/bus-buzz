@@ -12,6 +12,7 @@ export const busMapStyles = [
       'text-halign': 'center',
       'font-size': '20px',
       'font-weight': 'bold',
+      'font-family': 'Libre Baskerville, serif',
       'background-color': 'white',
       'border-width': 2,
       'border-color': 'black'
@@ -20,8 +21,8 @@ export const busMapStyles = [
   {
     selector: 'edge',
     style: {
-      'curve-style': 'segments',
-      width: 3,
+      'curve-style': 'unbundled-bezier',
+      width: 0,
       'line-color': '#9a9a9a',
     }
   },
@@ -43,11 +44,14 @@ export const busMapStyles = [
       height: 'data(size)',
       width: 'data(size)',
       'font-size': ele => ele.data('size') / 2,
+      // padding: '7px',
       'font-weight': 'bold',
       'background-color': 'data(color)',
       'line-color': 'black',
+      'text-valign': 'center',
+      'text-halign': 'center',
       shape: 'data(shape)' as any,
-      'transition-property': 'background-color, width, height',
+      'transition-property': 'background-color, width, height, font-size',
       'transition-duration': '0.2s'
     }
   }

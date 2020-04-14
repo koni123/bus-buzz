@@ -7,6 +7,7 @@ import { RouteDisplayComponent } from './components/route-display/route-display.
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from '../../core/core.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -16,12 +17,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     RouteSelectorComponent,
     RouteDisplayComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    CoreModule,
-    FontAwesomeModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        CoreModule,
+        FontAwesomeModule,
+        RouterModule
+    ]
 })
 export class HomeModule {
 }

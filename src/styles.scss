@@ -1,5 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 
-//body {
-//  margin: 0;
-//}
+body {
+  //font-family: 'IBM Plex Serif', serif;
+  //font-family: 'Merriweather', serif;
+  font-family: 'Libre Baskerville', serif;
+  background-color: #d3c9bd;
+  color: black;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e1d6c7;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #96a596;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5d6b54;
+}
+
+.route-selectors {
+  background: #d6cdb5;
+  border: 1px solid #493130;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.route-selectors:focus {
+  background: #d6cdb5;
+  border: 1px solid #493130;
+  box-shadow: none;
+}

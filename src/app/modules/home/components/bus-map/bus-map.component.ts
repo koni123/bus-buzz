@@ -4,6 +4,7 @@ import { DataService } from '../../../../core/services/data.service';
 import cytoscape, { LayoutOptions } from 'cytoscape';
 import { busMapStyles } from './bus-map-styles';
 import {
+  BUS_CHANGE_STATION_COLOR,
   BUS_CHANGE_STATION_SHAPE,
   DEFAULT_NODE_SHAPE,
   START_END_POINT_COLOR,
@@ -98,15 +99,15 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
             if (index === pathAsElements.length - 1 || index === 0) {
               ele.data('color', START_END_POINT_COLOR);
               ele.data('shape', START_END_POINT_SHAPE);
-              ele.data('size', 90);
+              ele.data('size', 110);
             } else if (edge.lineColor !== edge.nextLineColor) {
-              ele.data('color', '#F08080');
+              ele.data('color', BUS_CHANGE_STATION_COLOR);
               ele.data('shape', BUS_CHANGE_STATION_SHAPE);
-              ele.data('size', 80);
+              ele.data('size', 90);
             } else {
               ele.data('color', 'white');
               ele.data('shape', DEFAULT_NODE_SHAPE);
-              ele.data('size', 60);
+              ele.data('size', 70);
             }
             ele.addClass('highlighted-node');
           }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouteEdge } from '../../../../core/models/route-edge';
 import { ActivatedRoute } from '@angular/router';
 import { BusRouteService } from '../../../../core/services/bus-route.service';
-import { START_END_POINT_COLOR } from '../../../../core/config/common.config';
+import { DataService } from '../../../../core/services/data.service';
 
 @Component({
   selector: 'bb-main',
@@ -15,17 +15,19 @@ export class MainComponent implements OnInit {
   routeStart: string;
   routeEnd: string;
 
-  headerSquareColor = START_END_POINT_COLOR;
-
-  constructor(private activatedRoute: ActivatedRoute, private routeService: BusRouteService) {
+  constructor(private activatedRoute: ActivatedRoute, private routeService: BusRouteService, private dataService: DataService) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(qp => {
-      this.routeStart = qp.routeStart;
-      this.routeEnd = qp.routeEnd;
-      if (this.routeStart && this.routeEnd) {
+      if (qp.routeStart && qp.routeEnd) {
+        this.routeStart = this.dataService.verifyNode(qp.routeStart);
+        this.routeEnd = this.dataService.verifyNode(qp.routeEnd);
         this.loadRoute();
+      } else {
+        this.routeStart = undefined;
+        this.routeEnd = undefined;
+        this.routeEdges = [];
       }
     });
   }

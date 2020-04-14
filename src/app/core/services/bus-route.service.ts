@@ -43,13 +43,14 @@ export class BusRouteService {
    *
    * @param routeStartId start
    * @param routeEndId le end
+   * @return nodes from start to end
    */
   private findShortestRoute(routeStartId: string, routeEndId: string) {
     // get bus line edges
     const edges = this.dataService.getEdges();
 
     // arrange nodes to array of arrays
-    // handle both ways while iterating
+    // handle both ways of edge while iterating
     // a: [ { target: b, weight: 2},... ]
     const arrangedNodes = [];
     edges.forEach(edge => {
@@ -63,12 +64,11 @@ export class BusRouteService {
       arrangedNodes[edge.data.target].push({ target: edge.data.source, weight: edge.data.weight });
     });
 
-    // visited nodes to avoid endless loops
-    // nodes that have all of their edges checked
+    // visited nodes to avoid endless loops containing nodes that have all of their edges checked
     const visitedNodes = [];
     // what to do next
     let nodesToBeSearchedNext = [];
-    // route object
+    // route object for storing shortest routes from start to other nodes
     // initialize with route start and end properties
     const route = {};
     route[routeStartId] = { length: 0, nodes: [routeStartId] };
@@ -79,29 +79,30 @@ export class BusRouteService {
     while (nodesToBeSearchedNext.length > 0) {
       for (const node of nodesToBeSearchedNext) {
         if (arrangedNodes[node] && !visitedNodes.includes(node)) {
-          arrangedNodes[node].forEach(edge => {
-            if (!nodesToBeSearchedNext.includes(edge.target) && !visitedNodes.includes(edge.target)) {
-              nodesToBeSearchedNext.push(edge.target);
-            }
-            // if target length is not present in route, add it with current route length and route so far
-            if (!route[edge.target]) {
-              route[edge.target] = { length: 0, nodes: [] };
-              route[edge.target].length = route[node].length + edge.weight;
-              route[edge.target].nodes = [...route[node].nodes];
-              route[edge.target].nodes.push(edge.target);
-            } else if (route[edge.target].length > route[node].length + edge.weight) {
-              // if target length in route is longer than this newly found route to target and change route
-              route[edge.target].length = route[node].length + edge.weight;
-              route[edge.target].nodes = [...route[node].nodes];
-              route[edge.target].nodes.push(edge.target);
-            }
-          });
-          // don't overcrowd visited nodes
-          if (!visitedNodes.includes(node)) {
-            visitedNodes.push(node);
+          // if start => end route has been found AND is shorter than possible from current node then don't search
+          // with this amount of data does not make a difference to solve all possibilities, but if data gets bigger..
+          // assumption is that weight > 0
+          if (route[routeEndId].length > route[node].length) {
+            arrangedNodes[node].forEach(edge => {
+              if (!nodesToBeSearchedNext.includes(edge.target) && !visitedNodes.includes(edge.target)) {
+                nodesToBeSearchedNext.push(edge.target);
+              }
+              // if target length is not present in route, add object and length infinity to be caught in next if block
+              if (!route[edge.target]) {
+                route[edge.target] = { length: Infinity, nodes: [] };
+              }
+
+              if (route[edge.target].length > route[node].length + edge.weight) {
+                // if target length in route is longer than this newly found route to target and change route
+                route[edge.target].length = route[node].length + edge.weight;
+                route[edge.target].nodes = [...route[node].nodes];
+                route[edge.target].nodes.push(edge.target);
+              }
+            });
           }
+          visitedNodes.push(node);
         }
-        // don't add if it's already there
+        // remove node from queue
         nodesToBeSearchedNext = nodesToBeSearchedNext.filter(n => n !== node);
       }
     }
