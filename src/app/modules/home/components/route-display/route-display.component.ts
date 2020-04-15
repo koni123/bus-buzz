@@ -32,14 +32,14 @@ export class RouteDisplayComponent implements OnChanges {
     };
     this.routeEdges.forEach((edge, i) => {
       if (!lineRoute.startNode) {
-        lineRoute.startNode = edge.edgeStart;
+        lineRoute.startNode = edge.edgeSource;
       }
       if (i < this.routeEdges.length - 1) {
         if (edge.lineColor !== this.routeEdges[i + 1].lineColor) {
-          lineRoute.endNode = edge.edgeEnd;
+          lineRoute.endNode = edge.edgeTarget;
         }
       } else {
-        lineRoute.endNode = edge.edgeEnd;
+        lineRoute.endNode = edge.edgeTarget;
       }
       lineRoute.lineColor = edge.lineColor;
       lineRoute.totalTime += edge.edgeWeight;

@@ -1,7 +1,7 @@
 export interface RouteEdge {
   lineColor: string;
-  nextLineColor: string;
-  edgeStart: string;
-  edgeEnd: string;
+  nextLineColor?: string;
+  edgeSource: string;
+  edgeTarget: string;
   edgeWeight: number;
 }

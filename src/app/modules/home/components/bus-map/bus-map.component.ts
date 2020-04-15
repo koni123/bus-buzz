@@ -49,7 +49,18 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
       elements: {
         nodes: this.dataService.getNodes(),
         edges: [
-          ...this.dataService.getEdges()
+          ...this.dataService.getEdges().map(edge => {
+            return {
+              data:
+                {
+                  id: edge.edgeSource + edge.edgeTarget,
+                  weight: edge.edgeWeight,
+                  source: edge.edgeSource,
+                  target: edge.edgeTarget,
+                  color: edge.lineColor
+                }
+            };
+          })
           // ...GraphData.getBusLines()
         ]
       },
@@ -91,7 +102,7 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
         this.animationTimer.push(setTimeout(() => {
           const ele = pathAsElements[index];
           if (ele.isEdge()) {
-            edge = routeEdges.find(e => e.edgeStart + e.edgeEnd === ele.id() || e.edgeEnd + e.edgeStart === ele.id());
+            edge = routeEdges.find(e => e.edgeSource + e.edgeTarget === ele.id() || e.edgeTarget + e.edgeSource === ele.id());
             ele.data('color', edge.lineColor);
             ele.addClass('highlighted-edge');
           }
@@ -107,7 +118,7 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
             } else {
               ele.data('color', 'white');
               ele.data('shape', DEFAULT_NODE_SHAPE);
-              ele.data('size', 70);
+              ele.data('size', 80);
             }
             ele.addClass('highlighted-node');
           }

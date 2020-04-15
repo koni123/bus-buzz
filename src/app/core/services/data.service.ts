@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import reittiopas from '../../../assets/reittiopas.json';
 import { COLORS_OF_LINES, DEFAULT_NODE_COLOR, DEFAULT_NODE_SHAPE } from '../config/common.config';
+import { RouteEdge } from '../models/route-edge';
+import { Route } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -39,20 +41,16 @@ export class DataService {
     return backUpNodeIfGivenNotValid;
   }
 
-  public getEdges(): any[] {
-    const edges = [];
+  public getEdges(): RouteEdge[] {
+    const edges: RouteEdge[] = [];
     reittiopas.tiet.forEach(t => {
       if (this.getBusLineEdges().includes(t.mista + t.mihin)) {
         edges.push(
           {
-            data:
-              {
-                id: t.mista + t.mihin,
-                weight: t.kesto,
-                source: t.mista,
-                target: t.mihin,
-                color: 'gray'
-              }
+            lineColor: 'gray',
+            edgeSource: t.mista,
+            edgeTarget: t.mihin,
+            edgeWeight: t.kesto
           }
         );
       }

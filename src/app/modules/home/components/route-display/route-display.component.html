@@ -1,4 +1,9 @@
 <div>
+  <!--  nothing selected-->
+  <div class="text-center pb-1 mb-4" *ngIf="!routeStart || !routeEnd" style="border-bottom: 1px solid #493130">
+    <span>Valitse lähtö- ja määräasema.</span>
+  </div>
+
   <div class="text-center pb-1 mb-4" *ngIf="routeStart && routeEnd" style="border-bottom: 1px solid #493130">
     <span class="mr-2">Matka-aika:</span>
     <b>{{calculateTotalTime()}} {{calculateTotalTime() === 1 ? 'päivä' : 'päivää'}}</b>

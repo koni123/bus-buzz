@@ -4,8 +4,8 @@ export const busMapStyles = [
   {
     selector: 'node',
     style: {
-      height: 50,
-      width: 50,
+      height: 55,
+      width: 55,
       shape: DEFAULT_NODE_SHAPE,
       content: 'data(id)',
       'text-valign': 'center',
