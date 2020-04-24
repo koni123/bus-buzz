@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RouteEdge } from '../models/route-edge';
 import { DataService } from './data.service';
+import { findSimilarValuesInArrays } from '../util/util';
 
 @Injectable({
   providedIn: 'root'
@@ -22,19 +23,54 @@ export class BusRouteService {
     return nodesAndEdges;
   }
 
-  public getRouteEdges(routeIds: string[]): RouteEdge[] {
-    const edges: RouteEdge[] = [];
-    routeIds.forEach((id, i) => {
-      if (id.length === 2) {
-        edges.push({
-          edgeSource: id[0],
-          edgeTarget: id[1],
-          lineColor: i === 0 ? null : this.dataService.getColorForEdge(id),
-          nextLineColor: i < routeIds.length - 2 ? this.dataService.getColorForEdge(routeIds[i + 2]) : null,
-          edgeWeight: this.dataService.getWeightForEdge(id)
-        });
+  /**
+   * finds route with least bus changes
+   * idea is to check possible edge color arrays from start to finish and continue as long as possible with same color
+   * @param routeEdges edges for route
+   */
+  public getRouteEdges(routeEdges: string[]): RouteEdge[] {
+    // for storing edge and corresponding color possibilities
+    const routeEdgeColors = [];
+
+    // get all possible colors per edge
+    routeEdges.forEach(e => routeEdgeColors[e] = this.dataService.getColorsForEdge(e));
+    // store checked edges here
+    let checked = [];
+    // found same color for checked edges
+    let foundColor = 'gray';
+    for (let i = 0; i < routeEdges.length;) {
+      checked.push(routeEdges[i]);
+      // check all arrays with similar color so far plus one
+      const arraysToBeChecked = [];
+      checked.forEach(c => arraysToBeChecked.push(routeEdgeColors[c]));
+      const found = findSimilarValuesInArrays(arraysToBeChecked);
+      // if we find no match with previous, continue building arrays from this index
+      if (found === '') {
+        // remove last
+        checked.pop();
+        // filter found color among checked and empty checked array
+        checked.forEach(ch => routeEdgeColors[ch] = routeEdgeColors[ch].filter(color => color === foundColor)[0]);
+        checked = [];
+      } else {
+        // if a match is found, mark the color and move on
+        // single array ends up here
+        foundColor = found;
+        i++;
       }
-    });
+    }
+    checked.forEach(ch => routeEdgeColors[ch] = routeEdgeColors[ch].filter(color => color === foundColor)[0]);
+
+    // finally we can return something
+    const edges: RouteEdge[] = [];
+    for (let i = 0; i < routeEdges.length; i++) {
+      edges.push({
+        edgeSource: routeEdges[i][0],
+        edgeTarget: routeEdges[i][1],
+        lineColor: routeEdgeColors[routeEdges[i]],
+        nextLineColor: i < routeEdges.length - 1 ? routeEdgeColors[routeEdges[i + 1]] : null,
+        edgeWeight: this.dataService.getWeightForEdge(routeEdges[i])
+      });
+    }
     return edges;
   }
 

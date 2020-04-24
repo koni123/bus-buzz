@@ -1,50 +1,56 @@
-<div>
+<div class="mt-4">
   <!--  nothing selected-->
-  <div class="text-center pb-1 mb-4" *ngIf="!routeStart || !routeEnd" style="border-bottom: 1px solid #493130">
+  <div class="text-center pb-1 mb-4" *ngIf="!routeStart || !routeEnd" style="border-bottom: 0px solid #493130">
     <span>Valitse lähtö- ja määräasema.</span>
   </div>
 
-  <div class="text-center pb-1 mb-4" *ngIf="routeStart && routeEnd" style="border-bottom: 1px solid #493130">
+  <div class="text-center pb-1 mb-4" *ngIf="routeStart && routeEnd" style="border-bottom: 0px solid #493130">
     <span class="mr-2">Matka-aika:</span>
     <b>{{calculateTotalTime()}} {{calculateTotalTime() === 1 ? 'päivä' : 'päivää'}}</b>
   </div>
   <!--  if route start end end the same-->
-  <div class="row d-flex align-items-center justify-content-center change-bus"
+  <div class="row d-flex align-items-center justify-content-center change-bus rounded"
        *ngIf="routeStart && routeEnd && routeStart === routeEnd && lineRoutes.length === 0">
-    <fa-layers [fixedWidth]="true" size="2x" class="start-stop-node">
+    <fa-layers [fixedWidth]="true" size="3x" class="font-weight-bold">
       <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
+      <fa-icon [icon]="['far', 'square']"></fa-icon>
       <fa-layers-text content="{{routeStart}}"
                       class="start-stop-node-content"
-                      transform="shrink-6"></fa-layers-text>
+                      transform="shrink-8"></fa-layers-text>
     </fa-layers>
     <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
     <fa-icon [icon]="['fas', 'male']" size="2x" class="icon-margin"></fa-icon>
     <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-    <fa-layers [fixedWidth]="true" size="2x" class="start-stop-node">
+    <fa-layers [fixedWidth]="true" size="3x" class="font-weight-bold">
       <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
+      <fa-icon [icon]="['far', 'square']"></fa-icon>
       <fa-layers-text content="{{routeEnd}}"
                       class="start-stop-node-content"
-                      transform="shrink-6"></fa-layers-text>
+                      transform="shrink-8"></fa-layers-text>
     </fa-layers>
   </div>
   <!--  normal operations-->
   <ng-container *ngFor="let route of lineRoutes; index as i">
-    <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i === 0">
-      <fa-layers [fixedWidth]="true" size="2x" class="start-stop-node">
+    <!--    walk to bus-->
+    <div class="row d-flex align-items-center justify-content-center change-bus rounded" *ngIf="i === 0">
+      <fa-layers [fixedWidth]="true" size="3x" class="font-weight-bold">
         <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
+        <fa-icon [icon]="['far', 'square']"></fa-icon>
         <fa-layers-text content="{{routeStart}}"
                         class="start-stop-node-content"
-                        transform="shrink-6"></fa-layers-text>
+                        transform="shrink-8"></fa-layers-text>
       </fa-layers>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
     </div>
-    <div class="row d-flex align-items-center route-info">
-      <div class="col-auto px-1">
-        <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
-      </div>
+
+    <!--    stay on bus from stop to stop-->
+    <div class="row d-flex align-items-center route-info rounded">
+      <!--      <div class="col-auto px-1">-->
+      <!--        <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>-->
+      <!--      </div>-->
       <div class="col-auto px-1 bus-stop">
         <fa-layers [fixedWidth]="true" size="1x">
           <fa-icon [icon]="['far', 'circle']"></fa-icon>
@@ -54,7 +60,7 @@
         </fa-layers>
       </div>
       <div class="col-auto px-1">
-        <fa-icon [icon]="['fas', 'arrow-right']" size="1x"></fa-icon>
+        <fa-icon [icon]="'long-arrow-alt-right'" size="2x" [style.color]="route.lineColor"></fa-icon>
       </div>
       <div class="col-auto px-1 bus-stop">
         <fa-layers [fixedWidth]="true" size="1x">
@@ -67,7 +73,10 @@
       <div
         class="col text-right font-weight-bold">{{route.totalTime}} {{route.totalTime === 1 ? 'päivä' : 'päivää'}}</div>
     </div>
-    <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i < lineRoutes.length -1">
+
+    <!--    change bus-->
+    <div class="row d-flex align-items-center justify-content-center change-bus rounded"
+         *ngIf="i < lineRoutes.length -1">
       <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
@@ -75,15 +84,18 @@
       <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="this.lineRoutes[i+1].lineColor"
                class="icon-margin"></fa-icon>
     </div>
+
+    <!--    if last stop, step out of the bus-->
     <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i === lineRoutes.length - 1">
       <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-      <fa-layers [fixedWidth]="true" size="2x" class="start-stop-node">
+      <fa-layers [fixedWidth]="true" size="3x" class="font-weight-bold">
         <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
+        <fa-icon [icon]="['far', 'square']"></fa-icon>
         <fa-layers-text content="{{routeEnd}}" class="start-stop-node-content"
-                        transform="shrink-6"></fa-layers-text>
+                        transform="shrink-8"></fa-layers-text>
       </fa-layers>
     </div>
   </ng-container>

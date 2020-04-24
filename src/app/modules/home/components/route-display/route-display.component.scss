@@ -3,28 +3,19 @@
 }
 
 .change-bus {
-  border: 3px dotted #e1934c;
-  border-radius: 5px;
-  margin: 10px 0;
+  border: 1px dashed #d24f2e;
+  margin: 0;
   padding: 10px;
-  //background-color: #d6cdb5;
 }
 
 .route-info {
-  border: 3px solid #718955;
-  border-radius: 5px;
-  margin: 15px 0;
-  padding: 20px 10px;
-  //background-color: #d6cdb5;
+  border: 1px solid black;
+  margin: 30px 0;
+  padding: 10px 10px;
 }
 
 .bus-stop {
   font-size: 30px;
-  font-weight: 700;
-}
-
-.start-stop-node {
-  font-size: 40px;
   font-weight: 700;
 }
 

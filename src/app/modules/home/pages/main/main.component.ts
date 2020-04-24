@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
   routeEdges: RouteEdge[] = [];
   routeStart: string;
   routeEnd: string;
+  error = false;
 
   constructor(private activatedRoute: ActivatedRoute, private routeService: BusRouteService, private dataService: DataService) {
   }
@@ -23,17 +24,25 @@ export class MainComponent implements OnInit {
       if (qp.routeStart && qp.routeEnd) {
         this.routeStart = this.dataService.verifyNode(qp.routeStart);
         this.routeEnd = this.dataService.verifyNode(qp.routeEnd);
-        this.loadRoute();
+        if (this.routeStart !== 'error' && this.routeEnd !== 'error') {
+          this.loadRoute();
+        } else {
+          this.handleErrorInParams();
+        }
       } else {
-        this.routeStart = undefined;
-        this.routeEnd = undefined;
-        this.routeEdges = [];
+        this.handleErrorInParams();
       }
     });
   }
 
   private loadRoute() {
     this.route = this.routeService.getRouteNodeAndEdgeIds(this.routeStart, this.routeEnd);
-    this.routeEdges = this.routeService.getRouteEdges(this.route);
+    this.routeEdges = this.routeService.getRouteEdges(this.route.filter(r => r.length === 2));
+  }
+
+  private handleErrorInParams() {
+    this.routeStart = undefined;
+    this.routeEnd = undefined;
+    this.routeEdges = [];
   }
 }

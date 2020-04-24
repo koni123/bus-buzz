@@ -25,20 +25,16 @@ export class DataService {
    * @return node given or first in nodes if given is not valid
    */
   public verifyNode(node: string): string {
-    let backUpNodeIfGivenNotValid = '';
     let i = 0;
     for (const color in reittiopas.linjastot) {
       if (Object.prototype.hasOwnProperty.call(reittiopas.linjastot, color)) {
-        if (i === 0) {
-          backUpNodeIfGivenNotValid = reittiopas.linjastot[color][0];
-        }
         if (reittiopas.linjastot[color].includes(node)) {
           return node;
         }
         i++;
       }
     }
-    return backUpNodeIfGivenNotValid;
+    return 'error';
   }
 
   public getEdges(): RouteEdge[] {
@@ -69,15 +65,25 @@ export class DataService {
     return busLines;
   }
 
-  public getColorForEdge(edge: string): string {
+  /**
+   * returns all possible colors for an edge
+   * if nothing is found (which should not be the case) returns default gray
+   * @param edge to be checked
+   */
+  public getColorsForEdge(edge: string): string[] {
+    const returnableArray = [];
     for (const color in reittiopas.linjastot) {
       if (Object.prototype.hasOwnProperty.call(reittiopas.linjastot, color)) {
         if (this.getEdgeStringsFromArray(reittiopas.linjastot[color]).includes(edge)) {
-          return COLORS_OF_LINES[color];
+          returnableArray.push(COLORS_OF_LINES[color]);
         }
       }
     }
-    return 'gray';
+    if (returnableArray.length === 0) {
+      return ['gray'];
+    } else {
+      return returnableArray;
+    }
   }
 
   public getWeightForEdge(id: string): number {

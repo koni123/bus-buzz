@@ -30,7 +30,7 @@ export const busMapStyles = [
     selector: '.highlighted-edge',
     style: {
       'z-index': 10,
-      width: 10,
+      width: 13,
       'background-color': 'data(color)',
       'line-color': 'data(color)',
       'transition-property': 'background-color, line-color, width',
@@ -48,6 +48,7 @@ export const busMapStyles = [
       'font-weight': 'bold',
       'background-color': 'data(color)',
       'line-color': 'black',
+      'border-width': 'data(border)',
       'text-valign': 'center',
       'text-halign': 'center',
       shape: 'data(shape)' as any,
