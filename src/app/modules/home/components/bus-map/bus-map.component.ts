@@ -110,17 +110,17 @@ export class BusMapComponent implements OnChanges, AfterViewInit {
             if (index === pathAsElements.length - 1 || index === 0) {
               ele.data('color', START_END_POINT_COLOR);
               ele.data('shape', START_END_POINT_SHAPE);
-              ele.data('size', 110);
+              ele.data('size', 100);
               ele.data('border', 13);
             } else if (edge.lineColor !== edge.nextLineColor) {
               ele.data('color', BUS_CHANGE_STATION_COLOR);
               ele.data('shape', BUS_CHANGE_STATION_SHAPE);
-              ele.data('size', 90);
+              ele.data('size', 80);
               ele.data('border', 7);
             } else {
               ele.data('color', 'white');
               ele.data('shape', DEFAULT_NODE_SHAPE);
-              ele.data('size', 80);
+              ele.data('size', 70);
               ele.data('border', 7);
             }
             ele.addClass('highlighted-node');

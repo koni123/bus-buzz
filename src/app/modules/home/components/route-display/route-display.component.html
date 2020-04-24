@@ -11,29 +11,20 @@
   <!--  if route start end end the same-->
   <div class="row d-flex align-items-center justify-content-center change-bus rounded"
        *ngIf="routeStart && routeEnd && routeStart === routeEnd && lineRoutes.length === 0">
-    <fa-layers [fixedWidth]="true" size="3x" class="font-weight-bold">
+    <img [src]="'/assets/images/no-change.svg'" style="height: 85px" alt="walker"/>
+    <fa-layers [fixedWidth]="true" class="start-stop-node" style="font-size: 100px">
       <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
       <fa-icon [icon]="['far', 'square']"></fa-icon>
       <fa-layers-text content="{{routeStart}}"
                       class="start-stop-node-content"
                       transform="shrink-8"></fa-layers-text>
     </fa-layers>
-    <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-    <fa-icon [icon]="['fas', 'male']" size="2x" class="icon-margin"></fa-icon>
-    <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-    <fa-layers [fixedWidth]="true" size="3x" class="font-weight-bold">
-      <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
-      <fa-icon [icon]="['far', 'square']"></fa-icon>
-      <fa-layers-text content="{{routeEnd}}"
-                      class="start-stop-node-content"
-                      transform="shrink-8"></fa-layers-text>
-    </fa-layers>
   </div>
   <!--  normal operations-->
   <ng-container *ngFor="let route of lineRoutes; index as i">
-    <!--    walk to bus-->
-    <div class="row d-flex align-items-center justify-content-center change-bus rounded" *ngIf="i === 0">
-      <fa-layers [fixedWidth]="true" size="3x" class="font-weight-bold">
+    <!--    hop on bus-->
+    <div class="row d-flex align-items-center justify-content-center change-bus rounded mb-4" *ngIf="i === 0">
+      <fa-layers [fixedWidth]="true" class="start-stop-node">
         <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
         <fa-icon [icon]="['far', 'square']"></fa-icon>
         <fa-layers-text content="{{routeStart}}"
@@ -41,9 +32,9 @@
                         transform="shrink-8"></fa-layers-text>
       </fa-layers>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-      <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
+      <img [src]="'/assets/images/walking-man.svg'" style="height: 53px" alt="walker"/>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-      <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'bus']" size="3x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
     </div>
 
     <!--    stay on bus from stop to stop-->
@@ -51,6 +42,9 @@
       <!--      <div class="col-auto px-1">-->
       <!--        <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>-->
       <!--      </div>-->
+      <div class="col font-weight-bold">
+        {{route.totalTime}} {{route.totalTime === 1 ? 'päivä' : 'päivää'}}
+      </div>
       <div class="col-auto px-1 bus-stop">
         <fa-layers [fixedWidth]="true" size="1x">
           <fa-icon [icon]="['far', 'circle']"></fa-icon>
@@ -70,28 +64,37 @@
                           transform="shrink-7"></fa-layers-text>
         </fa-layers>
       </div>
-      <div
-        class="col text-right font-weight-bold">{{route.totalTime}} {{route.totalTime === 1 ? 'päivä' : 'päivää'}}</div>
     </div>
 
     <!--    change bus-->
     <div class="row d-flex align-items-center justify-content-center change-bus rounded"
          *ngIf="i < lineRoutes.length -1">
-      <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
-      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-      <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
-      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-      <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="this.lineRoutes[i+1].lineColor"
-               class="icon-margin"></fa-icon>
+      <!--      <fa-icon [icon]="['fas', 'bus']" size="3x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>-->
+      <!--      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>-->
+      <div class="col-auto">
+        <fa-icon [icon]="['fas', 'exchange-alt']" size="2x" [style.color]="'#d24f2e'" class="icon-margin"></fa-icon>
+      </div>
+      <!--      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>-->
+      <div class="col d-flex align-items-center justify-content-end">
+        <fa-icon [icon]="['fas', 'bus']" size="3x" [style.color]="this.lineRoutes[i+1].lineColor"
+                 class="icon-margin"></fa-icon>
+        <img [src]="'/assets/images/change.svg'" style="height: 55px" alt="walker"/>
+      </div>
     </div>
 
     <!--    if last stop, step out of the bus-->
-    <div class="row d-flex align-items-center justify-content-center change-bus" *ngIf="i === lineRoutes.length - 1">
-      <fa-icon [icon]="['fas', 'bus']" size="2x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
+    <div class="row d-flex align-items-center justify-content-center change-bus mt-4"
+         *ngIf="i === lineRoutes.length - 1">
+      <fa-icon [icon]="['fas', 'bus']" size="3x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-      <fa-icon [icon]="['fas', 'walking']" size="2x" class="icon-margin"></fa-icon>
+      <ng-container *ngIf="calculateTotalTime() >= 15">
+        <img [src]="'/assets/images/walker.svg'" style="height: 52px" alt="walker"/>
+      </ng-container>
+      <ng-container *ngIf="calculateTotalTime() < 15">
+        <img [src]="'/assets/images/walking-man.svg'" style="height: 53px" alt="walker"/>
+      </ng-container>
       <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
-      <fa-layers [fixedWidth]="true" size="3x" class="font-weight-bold">
+      <fa-layers [fixedWidth]="true" class="start-stop-node">
         <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
         <fa-icon [icon]="['far', 'square']"></fa-icon>
         <fa-layers-text content="{{routeEnd}}" class="start-stop-node-content"
