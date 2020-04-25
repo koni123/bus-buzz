@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import reittiopas from '../../../assets/reittiopas.json';
 import { COLORS_OF_LINES, DEFAULT_NODE_COLOR, DEFAULT_NODE_SHAPE } from '../config/common.config';
 import { RouteEdge } from '../models/route-edge';
-import { Route } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +10,9 @@ export class DataService {
   constructor() {
   }
 
+  /**
+   * returns all nodes for visualization
+   */
   public getNodes(): any[] {
     const nodes = [];
     reittiopas.pysakit.forEach(p => {
@@ -37,6 +39,10 @@ export class DataService {
     return 'error';
   }
 
+  /**
+   * returns all edges available
+   * does not return edges that do not belong to any bus routes
+   */
   public getEdges(): RouteEdge[] {
     const edges: RouteEdge[] = [];
     reittiopas.tiet.forEach(t => {
@@ -54,15 +60,12 @@ export class DataService {
     return edges;
   }
 
-  // find only edges which are along bus routes
-  private getBusLineEdges(): string[] {
-    let busLines = [];
-    for (const color in reittiopas.linjastot) {
-      if (Object.prototype.hasOwnProperty.call(reittiopas.linjastot, color)) {
-        busLines = [...busLines, ...this.getEdgeStringsFromArray(reittiopas.linjastot[color])];
-      }
-    }
-    return busLines;
+  /**
+   * get weight for edge
+   * @param id of ze edge in question
+   */
+  public getWeightForEdge(id: string): number {
+    return reittiopas.tiet.find(e => e.mista + e.mihin === id || e.mihin + e.mista === id).kesto;
   }
 
   /**
@@ -86,8 +89,15 @@ export class DataService {
     }
   }
 
-  public getWeightForEdge(id: string): number {
-    return reittiopas.tiet.find(e => e.mista + e.mihin === id || e.mihin + e.mista === id).kesto;
+  // find only edges which are along bus routes
+  private getBusLineEdges(): string[] {
+    let busLines = [];
+    for (const color in reittiopas.linjastot) {
+      if (Object.prototype.hasOwnProperty.call(reittiopas.linjastot, color)) {
+        busLines = [...busLines, ...this.getEdgeStringsFromArray(reittiopas.linjastot[color])];
+      }
+    }
+    return busLines;
   }
 
   private getEdgeStringsFromArray(arr: string[]): string[] {

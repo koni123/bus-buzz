@@ -31,9 +31,9 @@
                         class="start-stop-node-content"
                         transform="shrink-8"></fa-layers-text>
       </fa-layers>
-      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'long-arrow-alt-right']" size="1x" class="icon-margin"></fa-icon>
       <img [src]="'/assets/images/walking-man.svg'" style="height: 53px" alt="walker"/>
-      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'long-arrow-alt-right']" size="1x" class="icon-margin"></fa-icon>
       <fa-icon [icon]="['fas', 'bus']" size="3x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
     </div>
 
@@ -86,14 +86,14 @@
     <div class="row d-flex align-items-center justify-content-center change-bus mt-4"
          *ngIf="i === lineRoutes.length - 1">
       <fa-icon [icon]="['fas', 'bus']" size="3x" [style.color]="route.lineColor" class="icon-margin"></fa-icon>
-      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'long-arrow-alt-right']" size="1x" class="icon-margin"></fa-icon>
       <ng-container *ngIf="calculateTotalTime() >= 15">
         <img [src]="'/assets/images/walker.svg'" style="height: 52px" alt="walker"/>
       </ng-container>
       <ng-container *ngIf="calculateTotalTime() < 15">
         <img [src]="'/assets/images/walking-man.svg'" style="height: 53px" alt="walker"/>
       </ng-container>
-      <fa-icon [icon]="['fas', 'arrow-right']" size="1x" class="icon-margin"></fa-icon>
+      <fa-icon [icon]="['fas', 'long-arrow-alt-right']" size="1x" class="icon-margin"></fa-icon>
       <fa-layers [fixedWidth]="true" class="start-stop-node">
         <fa-icon [icon]="['fas', 'square']" [style.color]="startEndColor"></fa-icon>
         <fa-icon [icon]="['far', 'square']"></fa-icon>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RouteEdge } from '../models/route-edge';
 import { DataService } from './data.service';
-import { findSimilarValuesInArrays } from '../util/util';
+import { findSimilarStringsInArrays } from '../util/util';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,12 @@ export class BusRouteService {
   constructor(private dataService: DataService) {
   }
 
+  /**
+   * finds shortest route between two points
+   * returns nodes and edges in order i.e. ['A', 'AB', 'B', ...]
+   * @param routeStartId yes we need this
+   * @param routeEndId and this
+   */
   public getRouteNodeAndEdgeIds(routeStartId: string, routeEndId: string): string[] {
     const nodes = this.findShortestRoute(routeStartId, routeEndId);
     const nodesAndEdges = [];
@@ -40,15 +46,15 @@ export class BusRouteService {
     let foundColor = 'gray';
     for (let i = 0; i < routeEdges.length;) {
       checked.push(routeEdges[i]);
-      // check all arrays with similar color so far plus one
+      // check all arrays with similar color so far plus this iteration
       const arraysToBeChecked = [];
       checked.forEach(c => arraysToBeChecked.push(routeEdgeColors[c]));
-      const found = findSimilarValuesInArrays(arraysToBeChecked);
+      const found = findSimilarStringsInArrays(arraysToBeChecked);
       // if we find no match with previous, continue building arrays from this index
       if (found === '') {
         // remove last
         checked.pop();
-        // filter found color among checked and empty checked array
+        // filter found color among checked and empty checked array => convert array to string
         checked.forEach(ch => routeEdgeColors[ch] = routeEdgeColors[ch].filter(color => color === foundColor)[0]);
         checked = [];
       } else {
@@ -58,6 +64,7 @@ export class BusRouteService {
         i++;
       }
     }
+    // once more for the last checked OR if whole route was the same color
     checked.forEach(ch => routeEdgeColors[ch] = routeEdgeColors[ch].filter(color => color === foundColor)[0]);
 
     // finally we can return something
@@ -81,7 +88,7 @@ export class BusRouteService {
    * @param routeEndId le end
    * @return nodes from start to end
    */
-  private findShortestRoute(routeStartId: string, routeEndId: string) {
+  private findShortestRoute(routeStartId: string, routeEndId: string): string[] {
     const arrangedNodes = this.edgesToNodeDefinitions(this.dataService.getEdges());
     // already visited nodes to avoid endless loops containing nodes that have all of their edges checked
     const visitedNodes = [];
