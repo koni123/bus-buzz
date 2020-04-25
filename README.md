@@ -3,7 +3,7 @@
 Solidabiksen koodihaaste huhtikuu 2020 ja aikamatka historiallisen euroopan halki linja-autolla!
 Valitettavasti jopa kokeneemmilla matkaajilla alkaa yli parin viikon matkalla esiintymään kevyitä sivuoireita.
 
-##Toimintaperiaatteita
+## Toimintaperiaatteita
 
 Tavoitteena oli löytää lyhin reitti lähtödatassa annettujen pisteiden välillä. En ajatellut
 lähteä keksimään pyörää uusiksi, joten optimointiin valikoitui Dijkstran algoritmi - tai 
