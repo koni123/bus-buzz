@@ -6,13 +6,13 @@ Valitettavasti jopa kokeneemmilla matkaajilla alkaa yli parin viikon matkalla es
 ## Toimintaperiaatteita
 
 Tavoitteena oli löytää lyhin reitti lähtödatassa annettujen pisteiden välillä. En ajatellut
-lähteä keksimään pyörää uusiksi, joten optimointiin valikoitui Dijkstran algoritmi - tai 
-ainakin se mitä siitä tajusin.. Kirjoitin sen perusteella oman toteutukseni.
+lähteä keksimään pyörää uusiksi, joten optimointiin valikoitui Dijkstran algoritmi (tai 
+ainakin se mitä siitä tajusin..), jonka perusteella kirjoitin oman toteutukseni.
 Ideana on siis käydä läpi lähtöpisteestä lähtien jokainen solmupiste
 ja solmupisteestä lähtevät yksittäiset reitinpätkät kunnes kaikki aineistossa olevat solmupisteet
 on käyty läpi ja näin löydetty lyhin reitti alusta loppuun.
 
-Sen verran optimoin algoritmia, että jos on jo löydetty reitti alusta loppuun ja se on lyhyempi
+Sen verran optimoin, että jos on jo löydetty reitti alusta loppuun ja se on lyhyempi
 kuin tarkastelussa oleva matka alusta tarkasteltavalle pisteelle niin tarkastelua ei sen pisteen
 osalta tehdä. Näin pienellä aineistolla on aivan sama laskea jokainen reittikin mutta jos
 datan koko kasvaa niin jossain vaiheessa selaimesta loppuu paukut..
