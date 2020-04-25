@@ -4,6 +4,7 @@ Solidabiksen koodihaaste huhtikuu 2020 ja aikamatka historiallisen euroopan halk
 Valitettavasti jopa kokeneemmilla matkaajilla alkaa yli parin viikon matkalla esiintymään kevyitä sivuoireita.
 
 ##Toimintaperiaatteita
+
 Tavoitteena oli löytää lyhin reitti lähtödatassa annettujen pisteiden välillä. En ajatellut
 lähteä keksimään pyörää uusiksi, joten optimointiin valikoitui Dijkstran algoritmi - tai 
 ainakin se mitä siitä tajusin.. Kirjoitin sen perusteella oman toteutukseni.
@@ -23,6 +24,7 @@ Tästä johtuen päinvastaisilla matkoilla voi tulla vaihtoja eri kohtiin. Samaa
 toteuttaa esim vaihtoaikoja tai reitin kustannuksia laskevan metodin.
 
 ## Käytetyt tekniikat
+
 Projektin pohja [Angular CLI](https://github.com/angular/angular-cli) versio 9.1.1.
 
 Ulkoasu/layout/tyylittely [Bootstrap](https://getbootstrap.com/)
@@ -32,6 +34,7 @@ Ikonit tarjosi [FortAwesome](https://github.com/FortAwesome/angular-fontawesome)
 Visualisointikirjastona [Cytoscape JS](https://js.cytoscape.org/)
 
 ## From zero to hero
+
 ```
 git clone https://github.com/koni123/bus-buzz.git
 ```
