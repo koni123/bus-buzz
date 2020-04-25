@@ -3,13 +3,13 @@
     <h1 class="header-big">Linjuri 1945</h1>
   </div>
   <div class="row" style="padding: 0 15px">
-    <div class="col-lg-5 col-xl-4 p-2 pr-lg-2 my-4 my-lg-0 overflow-auto route-display" style="border: 0px solid #493130; border-radius: 5px">
+    <div class="col-lg-5 col-xl-4 p-0 pr-lg-3 my-4 my-lg-0 overflow-auto route-display" style="border: 0px solid #493130; border-radius: 5px">
       <bb-route-selector [routeStart]="routeStart" [routeEnd]="routeEnd"></bb-route-selector>
       <bb-route-display [routeStart]="routeStart"
                         [routeEnd]="routeEnd"
                         [routeEdges]="routeEdges"></bb-route-display>
     </div>
-    <div class="col-lg-7 col-xl-8 p-0 pl-lg-2" style="min-height: calc(100vh - 120px)">
+    <div class="col-lg-7 col-xl-8 p-0" style="min-height: calc(100vh - 120px)">
       <bb-bus-map [routeStart]="routeStart"
                   [routeEnd]="routeEnd"
                   [route]="route"

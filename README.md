@@ -1,6 +1,7 @@
 # bus-buzz (Linjuri 1945)
 
-Solidabiksen koodihaaste huhtikuu 2020. Aikamatka historiallisen euroopan halki linja-autolla!
+Solidabiksen koodihaaste huhtikuu 2020 ja aikamatka historiallisen euroopan halki linja-autolla!
+Valitettavasti jopa kokeneemmilla matkaajilla alkaa yli parin viikon matkalla esiintymään kevyitä sivuoireita.
 
 ##Toimintaperiaatteita
 Tavoitteena oli löytää lyhin reitti lähtödatassa annettujen pisteiden välillä. En ajatellut

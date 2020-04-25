@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouteEdge } from '../../../../core/models/route-edge';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BusRouteService } from '../../../../core/services/bus-route.service';
 import { DataService } from '../../../../core/services/data.service';
 
@@ -16,7 +16,10 @@ export class MainComponent implements OnInit {
   routeEnd: string;
   error = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private routeService: BusRouteService, private dataService: DataService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private routeService: BusRouteService,
+              private dataService: DataService) {
   }
 
   ngOnInit(): void {
@@ -30,7 +33,9 @@ export class MainComponent implements OnInit {
           this.handleErrorInParams();
         }
       } else {
-        this.handleErrorInParams();
+        this.routeStart = undefined;
+        this.routeEnd = undefined;
+        this.routeEdges = [];
       }
     });
   }
@@ -41,8 +46,6 @@ export class MainComponent implements OnInit {
   }
 
   private handleErrorInParams() {
-    this.routeStart = undefined;
-    this.routeEnd = undefined;
-    this.routeEdges = [];
+    this.router.navigate(['error']);
   }
 }

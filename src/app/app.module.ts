@@ -7,6 +7,7 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { fontAwesomeIcons } from './fa-icons';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './modules/home/home.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HomeModule } from './modules/home/home.module';
     FontAwesomeModule,
     CoreModule,
     HomeModule,
+    SharedModule,
     AppRoutingModule,
   ],
   providers: [],
