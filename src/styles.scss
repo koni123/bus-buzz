@@ -4,7 +4,8 @@ body {
   //font-family: 'IBM Plex Serif', serif;
   //font-family: 'Merriweather', serif;
   font-family: 'Libre Baskerville', serif;
-  background-color: #E8E8E8;
+  //background-color: #E8E8E8;
+  background-color: white;
   color: black;
 }
 
@@ -32,14 +33,18 @@ body {
 
 .route-selectors {
   //background: #d6cdb5;
-  //background: gainsboro;
+  //background-color: inherit;
   border: 1px solid #493130;
   font-weight: bold;
   font-size: larger;
 }
 
 .route-selectors:focus {
-  //background: gainsboro;
+  //background-color: inherit;
   border: 1px solid #493130;
   box-shadow: none;
+}
+
+.route-selectors option {
+  //background-color: gainsboro;
 }
